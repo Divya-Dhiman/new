@@ -4,7 +4,7 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -13,13 +13,13 @@ const Login = () => {
         email,
         password,
       });
-
+      console.log('Full server response:', response);
       const data = response.data;
 
       if (response.status === 200) {
-        console.log('Login successful:', data.user);
-
-        localStorage.setItem('accessToken', data.token);
+        console.log('Login successful:', data);
+        localStorage.setItem('accessToken', data.user.token);
+        setIsLoggedIn(true);
       } else {
         console.error('Login failed:', data.message);
       }
@@ -28,32 +28,41 @@ const Login = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+      <h2>{isLoggedIn ? 'Logout' : 'Login'}</h2>
+      {isLoggedIn ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
+      )}
     </div>
   );
 };

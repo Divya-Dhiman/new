@@ -2,13 +2,13 @@
 
 .sidebar {
     width: 95px;
-    height: 87%;
+    height: 89%;
     position: fixed;
-    top: 40px;
+    top: 55px;
     left: 0;
     background-color: #333;
     color: white;
-    padding: 30px;
+    padding: 0px;
     
   }
   

@@ -59,7 +59,8 @@ export const fetchData = (searchTerm,itemsPerPage,currentPage,sortColumn,sortOrd
 
     
         dispatch(fetchDataRequest());
- const token = localStorage.getItem(''); 
+        const token = localStorage.getItem('accessToken'); 
+        console.log('ddd',token)
     axios
       .get(`http://localhost:3001/users/getUsers`, {
         params: {

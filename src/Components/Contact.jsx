@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Contact.css';
-// import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { submitForm, fetchData } from './action/userAction'
 import { connect } from 'react-redux';
@@ -230,7 +229,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { fetchData })(Contact);
-
-// export default connect(mapStateToProps, { fetchData})(Contact);
-
-// export default Contact;

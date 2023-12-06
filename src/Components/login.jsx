@@ -29,6 +29,7 @@ const Login = () => {
         setEmail('');
         setPassword('');
         navigate('/');
+        window.location.href = '/home';
       } else {
         console.error('Login failed:', data.message);
       }

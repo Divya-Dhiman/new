@@ -24,7 +24,7 @@ const itemPerPage = 10;
     <Routes>
     
     <Route path='/' element={<Sidebar/>}/>
-    <Route path='/' element={<Home/>}/>
+    <Route path='/home' element={<Home/>}/>
     <Route path='/About' element={<About data={data} itemsPerPage={itemPerPage} />}/>
     <Route path='/Services' element={<Services/>}/>
     <Route path='/Contact' element={<Contact/>}/>

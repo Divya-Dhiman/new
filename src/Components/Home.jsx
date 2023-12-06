@@ -1,9 +1,11 @@
 import React from 'react'
+import Banners from './Banners'
 
 function Home() {
   return (
     <div>
-    Welcome to  home
+      <Banners/>
+      
     </div>
   )
 }

@@ -14,7 +14,7 @@ function Navbar() {
         {token && (
           <>
             <li className="nav-item">
-              <a href="/" className="nav-link">
+              <a href="/home" className="nav-link">
                 Home
               </a>
             </li>

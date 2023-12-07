@@ -1,0 +1,38 @@
+
+  .add-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100px; 
+    height: 40px; 
+    box-sizing: border-box;
+    margin-left: 93%;
+    margin-top: 1%;
+    
+  }
+  
+  .add-button:hover {
+    background-color: #7b45a0;
+  }
+  
+  .banner-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+  }
+  
+  .banner-table th, .banner-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .banner-table th {
+    background-color: grey;
+  }
+  
+  

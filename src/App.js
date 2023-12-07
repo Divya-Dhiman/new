@@ -10,6 +10,7 @@ import Services from './Components/Services';
 import Contact from './Components/Contact';
 import EditContact from './Components/EditContact';
 import Login from "./Components/login";
+import Banner from "./Components/Banner";
 
 function App(){
 const data = []
@@ -30,6 +31,7 @@ const itemPerPage = 10;
     <Route path='/Contact' element={<Contact/>}/>
     <Route path="/editContact" element={<EditContact/>}/>
     <Route path="/login" element={<Login/>}/>
+    <Route path="/Banner" element={<Banner/>}/>
     
     
     </Routes>

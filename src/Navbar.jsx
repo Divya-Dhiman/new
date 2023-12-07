@@ -33,6 +33,11 @@ function Navbar() {
                 Contact
               </a>
             </li>
+            <li className="nav-item">
+              <a href="/Banner" className="nav-link">
+                Banner
+              </a>
+            </li>
           </>
         )}
         <li className="nav-item">
@@ -47,6 +52,7 @@ function Navbar() {
             </a>
           )}
         </li>
+        
       </ul>
     </nav>
   );

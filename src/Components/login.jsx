@@ -8,9 +8,12 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const handleLogin = async (event) => {
     event.preventDefault();
+
+    
 
     try {
       const response = await axios.post('http://localhost:3001/users/login', {
@@ -32,9 +35,11 @@ const Login = () => {
         window.location.href = '/home';
       } else {
         console.error('Login failed:', data.message);
+        setError('Email or password is incorrect');
       }
     } catch (error) {
       console.error('Error during login:', error.message);
+      setError('Error during login. Please try again.');
     }
   };
 
@@ -62,7 +67,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
+{error && <p className="error-message">{error}</p>} 
         <button type="submit">Login</button>
       </form>
 

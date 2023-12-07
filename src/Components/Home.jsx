@@ -1,5 +1,5 @@
 import React from 'react'
-import Banners from './Banners'
+import Banners from './BannersImage'
 
 function Home() {
   return (

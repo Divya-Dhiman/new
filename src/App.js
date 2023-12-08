@@ -11,6 +11,8 @@ import Contact from './Components/Contact';
 import EditContact from './Components/EditContact';
 import Login from "./Components/login";
 import Banner from "./Components/Banner";
+import AddBanner from "./Components/AddBanner";
+import EditBanner from "./Components/EditBanner";
 
 function App(){
 const data = []
@@ -32,6 +34,10 @@ const itemPerPage = 10;
     <Route path="/editContact" element={<EditContact/>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/Banner" element={<Banner/>}/>
+    <Route path="/AddBanner" element={<AddBanner/>}/>
+    <Route path="/EditBanner" element={<EditBanner/>}/>
+
+
     
     
     </Routes>

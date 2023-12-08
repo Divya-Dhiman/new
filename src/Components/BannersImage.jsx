@@ -7,7 +7,7 @@ import Banner4 from './../Banner4.jpg';
 import Banner5 from './../Banner5.jpg';
 import Banner6 from './../Banner6.jpg';
 import Banner7 from './../Banner7.jpg';
-import "./Banners.css";
+import "./BannersImage.css";
 
 function Banners() {
   const slides = useRef(null);

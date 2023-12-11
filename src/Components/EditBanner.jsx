@@ -14,19 +14,15 @@ function EditBanner() {
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
-    fetchBanners();
-  }, [id]);
-
-  const fetchBanners = async () => {
+    const fetchBanners = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/banner/getBanner/${id}`);
+      const response = await fetch(`http://localhost:3001/banner/getBannerById/${id}`);
       const data = await response.json();
 
-      // Update the state with the fetched data
       setBanners({
         title: data.title,
         description: data.description,
-        image: data.image, // Assuming your API returns an image URL
+        image: data.image,
       });
       setImagePreview(data.image);
       console.log('Fetched data:', data);
@@ -35,9 +31,13 @@ function EditBanner() {
       console.error('Error Fetching data:', error);
     }
   };
+    fetchBanners();
+  }, [id]);
+
+  
+  
 
   const handleInputChange = (e) => {
-    // Update the form data as the user types
     setBanners({
       ...banners,
       [e.target.name]: e.target.value,
@@ -46,7 +46,6 @@ function EditBanner() {
 
   const handleUpdate = async () => {
     try {
-      // Send updated data to the server
       const response = await fetch(`http://localhost:3001/banners/updateBanner/${id}`, {
         method: 'PUT',
         headers: {
@@ -55,9 +54,7 @@ function EditBanner() {
         body: JSON.stringify(banners),
       });
 
-      // Handle response as needed
       if (response.ok) {
-        // Fetch updated data after a successful update
         fetchBanners();
         navigate('/Banner')
       } else {
@@ -74,7 +71,6 @@ function EditBanner() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Update only the image property in the state
         setBanners((prevBanners) => ({
           ...prevBanners,
           image: reader.result,
@@ -87,7 +83,6 @@ function EditBanner() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Add any additional form submission logic here if needed
   };
 
   return (
@@ -118,7 +113,10 @@ function EditBanner() {
         </button>
         <button onClick={() => navigate('/banner')}>Cancel</button>
       </form>
+      
     </div>
+
+    
   );
 }
 

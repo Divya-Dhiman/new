@@ -194,8 +194,7 @@ export default function About() {
       setSortOrder('asc');
     }
   };
-  // const sortedData= filteredData.sort(a,b);
-  // console.log("sortedData",sortedData)
+  
   const sortedData = filteredData.slice().sort((a, b) => {
     const columnA = a[sortColumn];
     const columnB = b[sortColumn];

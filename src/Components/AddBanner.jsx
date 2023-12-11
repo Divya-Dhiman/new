@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
+import './AddBanner.css'
 
-function AddBanner({ onClose, onBannerCreated }) {
+function AddBanner() {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -17,15 +18,14 @@ function AddBanner({ onClose, onBannerCreated }) {
         imageDataUrl = await convertImageToBase64(imageFile);
       }
 
-      const response = await axios.post('http://localhost:3001/banner/createBanner', {
+      await axios.post('http://localhost:3001/banner/createBanner', {
         title,
         description,
         imageUrl: imageDataUrl,
       });
       navigate('/Banner');
 
-      onBannerCreated(response.data);
-      onClose();
+      
     } catch (error) {
       console.error('Error creating banner:', error);
     }
@@ -55,26 +55,27 @@ function AddBanner({ onClose, onBannerCreated }) {
     }
   };
 
-  return (
+   return (
     <div className="create-form">
       <h2>Create Banner</h2>
       <form>
-      <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Description:
-        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Image:
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-      </label>
-      <br />
-      <button onClick={handleCreateBanner}>Create Banner</button>
+        <div className="form-group">
+          <label>Title:</label>
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label>Description:</label>
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label>Image:</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
+        </div>
+        <div className="form-group">
+          <button type="button" onClick={handleCreateBanner}>
+            Create Banner
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -14,30 +14,26 @@ function EditBanner() {
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/banner/getBannerById/${id}`);
+        const data = await response.json();
+
+        setBanners({
+          title: data.title,
+          description: data.description,
+          image: data.image,
+        });
+        setImagePreview(data.image);
+        console.log('Fetched data:', data);
+      } catch (error) {
+        console.error('Error Fetching data:', error);
+      }
+    };
     fetchBanners();
   }, [id]);
 
-  const fetchBanners = async () => {
-    try {
-      const response = await fetch(`http://localhost:3001/banner/getBanner/${id}`);
-      const data = await response.json();
-
-      // Update the state with the fetched data
-      setBanners({
-        title: data.title,
-        description: data.description,
-        image: data.image, // Assuming your API returns an image URL
-      });
-      setImagePreview(data.image);
-      console.log('Fetched data:', data);
-
-    } catch (error) {
-      console.error('Error Fetching data:', error);
-    }
-  };
-
   const handleInputChange = (e) => {
-    // Update the form data as the user types
     setBanners({
       ...banners,
       [e.target.name]: e.target.value,
@@ -46,7 +42,6 @@ function EditBanner() {
 
   const handleUpdate = async () => {
     try {
-      // Send updated data to the server
       const response = await fetch(`http://localhost:3001/banners/updateBanner/${id}`, {
         method: 'PUT',
         headers: {
@@ -55,11 +50,9 @@ function EditBanner() {
         body: JSON.stringify(banners),
       });
 
-      // Handle response as needed
       if (response.ok) {
-        // Fetch updated data after a successful update
         fetchBanners();
-        navigate('/Banner')
+        navigate('/Banner');
       } else {
         console.error('Update failed:', response.statusText);
       }
@@ -74,7 +67,6 @@ function EditBanner() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Update only the image property in the state
         setBanners((prevBanners) => ({
           ...prevBanners,
           image: reader.result,
@@ -87,36 +79,48 @@ function EditBanner() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Add any additional form submission logic here if needed
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <h1>Edit banner</h1>
       <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={banners.title}
-          onChange={handleInputChange}
-        />
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={banners.description}
-          onChange={handleInputChange}
-        />
+        <div className="form-group">
+          <label>Title:</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            name="title"
+            value={banners.title}
+            onChange={handleInputChange}
+          />
+        </div>
 
-        <label>Image:</label>
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        {imagePreview && <img src={imagePreview} alt="Preview" />}
+        <div className="form-group">
+          <label>Description:</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            name="description"
+            value={banners.description}
+            onChange={handleInputChange}
+          />
+        </div>
 
-        <button type="button" onClick={handleUpdate}>
-          Update
-        </button>
-        <button onClick={() => navigate('/banner')}>Cancel</button>
+        <div className="form-group">
+          <label>Image:</label>
+          <input type="file" className="form-control-file form-control-sm" accept="image/*" onChange={handleImageChange} />
+          {imagePreview && <img src={imagePreview} alt="Preview" className="mt-2 img-fluid" />}
+        </div>
+
+        <div className="btn-group">
+          <button type="button" className="btn btn-primary btn-sm" onClick={handleUpdate}>
+            Update
+          </button>
+          <button className="btn btn-secondary btn-sm" onClick={() => navigate('/banner')}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

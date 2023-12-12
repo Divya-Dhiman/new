@@ -152,7 +152,7 @@ function Contact({ data, loading, error, fetchData }) {
         <form>
           <label>Select an option:</label>
           <select value={selectedValue} 
-          onChange={handleSelectChange}>
+          onChange={handleSelectChange} className='form-select'>
             <option value="">Select an option</option>
             {data && data.map((item) => (
               <option key={item._id} value={item._id}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -12,8 +11,6 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    
 
     try {
       const response = await axios.post('http://localhost:3001/users/login', {
@@ -43,35 +40,41 @@ const Login = () => {
     }
   };
 
-
-
   return (
-    <div className="login-container">
+    <div className="container mt-5">
       <form onSubmit={handleLogin} className="login-form">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-{error && <p className="error-message">{error}</p>} 
-        <button type="submit">Login</button>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
       </form>
-
-      
     </div>
   );
 };

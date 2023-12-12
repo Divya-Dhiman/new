@@ -1,22 +1,11 @@
-
-
-#images-slides {
-    width: 50%;
-    margin-top: 18vh;
-    margin-left: 50vh;
-  }
-  
-  .carousel-item {
-    text-align: center;
-  }
-  
   .first,
   .second,
   .third,
-  .fourth {
+  .fourth,
+  .five {
     width: 100%;
-    height: 400px; 
-    object-fit: cover;
+    height: 645px; 
+    /* object-fit: cover; */
   }
   
   

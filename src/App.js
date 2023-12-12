@@ -35,7 +35,7 @@ const itemPerPage = 10;
     <Route path="/login" element={<Login/>}/>
     <Route path="/Banner" element={<Banner/>}/>
     <Route path="/AddBanner" element={<AddBanner/>}/>
-    <Route path="/EditBanner" element={<EditBanner/>}/>
+    <Route path="/EditBanner/:id" element={<EditBanner/>}/>
 
 
     

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import './About.css';
-
 const itemPerPage = 10;
 
 const data = [
@@ -173,7 +171,7 @@ const pageIndex = Array.from({ length: numberOfPage }, (_, idx) => idx + 1);
 export default function About() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [sortColumn, setSortColumn] = useState('Name');
+  const [sortColumn, setSortColumn] = useState('ID');
   const [sortOrder, setSortOrder] = useState('asc'); 
 
   const filteredData = data.filter(
@@ -194,8 +192,7 @@ export default function About() {
       setSortOrder('asc');
     }
   };
-  // const sortedData= filteredData.sort(a,b);
-  // console.log("sortedData",sortedData)
+  
   const sortedData = filteredData.slice().sort((a, b) => {
     const columnA = a[sortColumn];
     const columnB = b[sortColumn];
@@ -214,80 +211,89 @@ export default function About() {
 
   return (
     <>
-      <div className='About'>
-        <div>
-          <input
-            type='text'
-            placeholder='Search '
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(0);
-            }}
-          /><br />
-          <label>
-            Sort By:
-            <select value={sortColumn} onChange={(e) => handleSort(e.target.value)}>
-            <option value="id">ID</option>
-              <option value="Name">Name</option>
-              <option value="Age">Age</option>
-              
-            </select>
-          </label>
-          <label>
-            Order:
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-            </select>
-          </label>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Designation</th>
-              <th>Company</th>
-              <th>Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows?.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.Name}</td>
-                <td>{item.Age}</td>
-                <td>{item.Designation}</td>
-                <td>{item.Company}</td>
-                <td>{item.Address}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className='container '>
+  <div className='row mb-3'>
+    <div className='col-md-6'>
+      <input
+        type='text'
+        className='form-control'
+        placeholder='Search '
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(0);
+        }}
+      />
+    </div>
+    <div className='col-md-3'>
+      <label className='mr-2'>Sort By:</label>
+      <select className='form-control' value={sortColumn} onChange={(e) => handleSort(e.target.value)}>
+        <option value="id">ID</option>
+        <option value="Name">Name</option>
+        <option value="Age">Age</option>
+      </select>
+    </div>
+    <div className='col-md-3'>
+      <label className='mr-2'>Order:</label>
+      <select className='form-control' value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+  </div>
 
-        <div>
-          <button disabled={currentPage === 0} onClick={() => handlePerPageChange(currentPage - 1)}>
-            Previous
-          </button>
-          {pageIndex.slice(Math.max(0, currentPage - 2), Math.min(numberOfPage, currentPage + 3)).map((page) => (
-            <button
-              key={page}
-              onClick={() => handlePerPageChange(page - 1)}
-              className={page === currentPage + 1 ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            disabled={currentPage === numberOfPage - 1}
-            onClick={() => handlePerPageChange(currentPage + 1)}
-          >
-            Next
-          </button>
+  <table className='table'>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Designation</th>
+        <th>Company</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows?.map((item) => (
+        <tr key={item.id}>
+          <td>{item.id}</td>
+          <td>{item.Name}</td>
+          <td>{item.Age}</td>
+          <td>{item.Designation}</td>
+          <td>{item.Company}</td>
+          <td>{item.Address}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <div className='form-group btn btn-primary btn-sm'>
+    <button  
+    disabled={currentPage === 0} onClick={() => handlePerPageChange(currentPage - 1)}>
+      Previous
+    </button>
+    </div>
+    {pageIndex.slice(Math.max(0, currentPage - 2), Math.min(numberOfPage, currentPage + 3)).map((page) => (
+      <div className='form-group btn btn-primary btn-sm'>
+      <button
+        key={page}
+        onClick={() => handlePerPageChange(page - 1)}
+        className={`btn ${page === currentPage + 1 ? 'btn-primary' : 'btn-secondary'}`}
+      >
+        {page}
+      </button>
         </div>
-      </div>
+
+    ))}
+    <div className='form-group btn btn-primary btn-sm'>
+    <button
+      disabled={currentPage === numberOfPage - 1}
+      onClick={() => handlePerPageChange(currentPage + 1)}
+    >
+      Next
+    </button>
+    </div>
+  </div>
     </>
   );
 }

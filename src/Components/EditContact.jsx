@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch  } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUser } from './action/userAction';
 
 function EditContact() {
@@ -40,7 +40,6 @@ function EditContact() {
         console.error('Error fetching user data:', error);
       });
   };
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -52,7 +51,7 @@ function EditContact() {
 
   const validateForm = () => {
     const errors = {};
-  
+
     if (formData.firstName.trim() === '') {
       errors.firstName = 'First name is required';
     }
@@ -65,8 +64,6 @@ function EditContact() {
       errors.mobile = 'Mobile is required';
     }
 
-    
-
     if (formData.email.trim() === '') {
       errors.email = 'Email is required';
     } else if (!isValidEmail(formData.email)) {
@@ -78,23 +75,12 @@ function EditContact() {
   };
 
   const isValidEmail = (email) => {
-
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-  //   if (validateForm()) {
-  //     try {
-  //       await axios.put(`http://localhost:3001/users/updateUser/${id}`, formData);
-  //       
-  //     } catch (error) {
-  //       console.error('Error updating user data:', error);
-  //     }
-  //   }
-  // };
 
     if (validateForm()) {
       try {
@@ -104,16 +90,17 @@ function EditContact() {
         console.error('Error updating user data:', error);
       }
     }
+  };
 
-  }
   return (
-    <div className="container">
+    <div className="container mt-5">
       <h1>Edit Contact</h1>
       <form onSubmit={handleFormSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
+            className="form-control"
             id="firstName"
             name="firstName"
             value={formData.firstName}
@@ -123,10 +110,11 @@ function EditContact() {
             <span className="error">{validationErrors.firstName}</span>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
+            className="form-control"
             id="lastName"
             name="lastName"
             value={formData.lastName}
@@ -136,10 +124,11 @@ function EditContact() {
             <span className="error">{validationErrors.lastName}</span>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="mobile">Mobile</label>
           <input
             type="text"
+            className="form-control"
             id="mobile"
             maxLength={10}
             name="mobile"
@@ -150,10 +139,11 @@ function EditContact() {
             <span className="error">{validationErrors.mobile}</span>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="age">Age</label>
           <input
             type="text"
+            className="form-control"
             id="age"
             name="age"
             maxLength={2}
@@ -164,10 +154,11 @@ function EditContact() {
             <span className="error">{validationErrors.age}</span>
           )}
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
+            className="form-control"
             id="email"
             name="email"
             value={formData.email}
@@ -177,8 +168,18 @@ function EditContact() {
             <span className="error">{validationErrors.email}</span>
           )}
         </div>
-        <button type="submit">Update</button>
-        <button onClick={() => navigate('/Services')}>Cancel</button>
+        <div className="btn-group">
+          <button type="submit" className="btn btn-primary">
+            Update
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => navigate('/Services')}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -15,27 +15,23 @@ function EditBanner() {
 
   useEffect(() => {
     const fetchBanners = async () => {
-    try {
-      const response = await fetch(`http://localhost:3001/banner/getBannerById/${id}`);
-      const data = await response.json();
+      try {
+        const response = await fetch(`http://localhost:3001/banner/getBannerById/${id}`);
+        const data = await response.json();
 
-      setBanners({
-        title: data.title,
-        description: data.description,
-        image: data.image,
-      });
-      setImagePreview(data.image);
-      console.log('Fetched data:', data);
-
-    } catch (error) {
-      console.error('Error Fetching data:', error);
-    }
-  };
+        setBanners({
+          title: data.title,
+          description: data.description,
+          image: data.image,
+        });
+        setImagePreview(data.image);
+        console.log('Fetched data:', data);
+      } catch (error) {
+        console.error('Error Fetching data:', error);
+      }
+    };
     fetchBanners();
   }, [id]);
-
-  
-  
 
   const handleInputChange = (e) => {
     setBanners({
@@ -56,7 +52,7 @@ function EditBanner() {
 
       if (response.ok) {
         fetchBanners();
-        navigate('/Banner')
+        navigate('/Banner');
       } else {
         console.error('Update failed:', response.statusText);
       }
@@ -86,37 +82,47 @@ function EditBanner() {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <h1>Edit banner</h1>
       <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={banners.title}
-          onChange={handleInputChange}
-        />
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={banners.description}
-          onChange={handleInputChange}
-        />
+        <div className="form-group">
+          <label>Title:</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            name="title"
+            value={banners.title}
+            onChange={handleInputChange}
+          />
+        </div>
 
-        <label>Image:</label>
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        {imagePreview && <img src={imagePreview} alt="Preview" />}
+        <div className="form-group">
+          <label>Description:</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            name="description"
+            value={banners.description}
+            onChange={handleInputChange}
+          />
+        </div>
 
-        <button type="button" onClick={handleUpdate}>
-          Update
-        </button>
-        <button onClick={() => navigate('/banner')}>Cancel</button>
+        <div className="form-group">
+          <label>Image:</label>
+          <input type="file" className="form-control-file form-control-sm" accept="image/*" onChange={handleImageChange} />
+          {imagePreview && <img src={imagePreview} alt="Preview" className="mt-2 img-fluid" />}
+        </div>
+
+        <div className="btn-group">
+          <button type="button" className="btn btn-primary btn-sm" onClick={handleUpdate}>
+            Update
+          </button>
+          <button className="btn btn-secondary btn-sm" onClick={() => navigate('/banner')}>
+            Cancel
+          </button>
+        </div>
       </form>
-      
     </div>
-
-    
   );
 }
 

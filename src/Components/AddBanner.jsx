@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
-import './AddBanner.css'
+import { useNavigate } from 'react-router-dom';
 
 function AddBanner() {
   const navigate = useNavigate();
@@ -24,8 +23,6 @@ function AddBanner() {
         imageUrl: imageDataUrl,
       });
       navigate('/Banner');
-
-      
     } catch (error) {
       console.error('Error creating banner:', error);
     }
@@ -55,29 +52,34 @@ function AddBanner() {
     }
   };
 
-   return (
-    <div className="create-form">
+  return (
+   <div className="container  p-0">
+  <div className="row justify-content-center ">
+    <div className="col-md-6">
       <h2>Create Banner</h2>
       <form>
         <div className="form-group">
           <label>Title:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input type="text" className="form-control form-control-sm" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="form-group">
           <label>Description:</label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <input type="text" className="form-control form-control-sm" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className="form-group">
           <label>Image:</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <input type="file" className="form-control-file form-control-sm" accept="image/*" onChange={handleImageChange} />
         </div>
-        <div className="form-group">
-          <button type="button" onClick={handleCreateBanner}>
+        <div className="form-group text-center btn btn-secondary btn-sm">
+          <button type="button" className="btn btn-primary" onClick={handleCreateBanner}>
             Create Banner
           </button>
         </div>
       </form>
     </div>
+  </div>
+</div>
+
   );
 }
 
